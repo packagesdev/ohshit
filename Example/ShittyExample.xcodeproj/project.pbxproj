@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F43B72FE1DC01B090056C8F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F43B72FD1DC01B090056C8F7 /* main.m */; };
+		F43B731C1DC01CD60056C8F7 /* OhShit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F43B73171DC01CCB0056C8F7 /* OhShit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F43B73161DC01CCB0056C8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F43B72731DC014DA0056C8F7;
+			remoteInfo = OhShit;
+		};
+		F43B73181DC01CCB0056C8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F43B72C01DC016AE0056C8F7;
+			remoteInfo = libohshit;
+		};
+		F43B731A1DC01CD20056C8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F43B72721DC014DA0056C8F7;
+			remoteInfo = OhShit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F43B72F81DC01B090056C8F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F43B72FA1DC01B090056C8F7 /* ShittyExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ShittyExample; sourceTree = BUILT_PRODUCTS_DIR; };
+		F43B72FD1DC01B090056C8F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OhShit.xcodeproj; path = ../OhShit.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F43B72F71DC01B090056C8F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F43B731C1DC01CD60056C8F7 /* OhShit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F43B72F11DC01B090056C8F7 = {
+			isa = PBXGroup;
+			children = (
+				F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */,
+				F43B72FC1DC01B090056C8F7 /* ShittyExample */,
+				F43B72FB1DC01B090056C8F7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F43B72FB1DC01B090056C8F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F43B72FA1DC01B090056C8F7 /* ShittyExample */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F43B72FC1DC01B090056C8F7 /* ShittyExample */ = {
+			isa = PBXGroup;
+			children = (
+				F43B72FD1DC01B090056C8F7 /* main.m */,
+			);
+			path = ShittyExample;
+			sourceTree = "<group>";
+		};
+		F43B73121DC01CCB0056C8F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F43B73171DC01CCB0056C8F7 /* OhShit.framework */,
+				F43B73191DC01CCB0056C8F7 /* liblibohshit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F43B72F91DC01B090056C8F7 /* ShittyExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F43B73011DC01B090056C8F7 /* Build configuration list for PBXNativeTarget "ShittyExample" */;
+			buildPhases = (
+				F43B72F61DC01B090056C8F7 /* Sources */,
+				F43B72F71DC01B090056C8F7 /* Frameworks */,
+				F43B72F81DC01B090056C8F7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F43B731B1DC01CD20056C8F7 /* PBXTargetDependency */,
+			);
+			name = ShittyExample;
+			productName = ShittyExample;
+			productReference = F43B72FA1DC01B090056C8F7 /* ShittyExample */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F43B72F21DC01B090056C8F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = WhiteBox;
+				TargetAttributes = {
+					F43B72F91DC01B090056C8F7 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = F43B72F51DC01B090056C8F7 /* Build configuration list for PBXProject "ShittyExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F43B72F11DC01B090056C8F7;
+			productRefGroup = F43B72FB1DC01B090056C8F7 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F43B73121DC01CCB0056C8F7 /* Products */;
+					ProjectRef = F43B73111DC01CCB0056C8F7 /* OhShit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F43B72F91DC01B090056C8F7 /* ShittyExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F43B73171DC01CCB0056C8F7 /* OhShit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OhShit.framework;
+			remoteRef = F43B73161DC01CCB0056C8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F43B73191DC01CCB0056C8F7 /* liblibohshit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibohshit.a;
+			remoteRef = F43B73181DC01CCB0056C8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F43B72F61DC01B090056C8F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F43B72FE1DC01B090056C8F7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F43B731B1DC01CD20056C8F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OhShit;
+			targetProxy = F43B731A1DC01CD20056C8F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F43B72FF1DC01B090056C8F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F43B73001DC01B090056C8F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F43B73021DC01B090056C8F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"\"$(SRCROOT)/../../OhShit\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F43B73031DC01B090056C8F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"\"$(SRCROOT)/../../OhShit\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F43B72F51DC01B090056C8F7 /* Build configuration list for PBXProject "ShittyExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F43B72FF1DC01B090056C8F7 /* Debug */,
+				F43B73001DC01B090056C8F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F43B73011DC01B090056C8F7 /* Build configuration list for PBXNativeTarget "ShittyExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F43B73021DC01B090056C8F7 /* Debug */,
+				F43B73031DC01B090056C8F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F43B72F21DC01B090056C8F7 /* Project object */;
+}
