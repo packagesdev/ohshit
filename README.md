@@ -4,8 +4,8 @@ The OhShit framework (or static library) simulates errors when trying to read, w
 
 ## Code Example
 
-#import <Foundation/Foundation.h>
-#import <OhShit/OhShit.h>
+\#import <Foundation/Foundation.h>
+\#import <OhShit/OhShit.h>
 
 int main(int argc, const char * argv[])
 {
