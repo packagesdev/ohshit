@@ -14,8 +14,10 @@ int main(int argc, const char * argv[])
 	{
 		// Simulate no more space on the startup disk when trying to write things to /Users/Shared
 		
-		[[OHSHITManager defaultManager] setStorageFailuresList:@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"],
-																   OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)}]];
+		NSArray * tList=@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"],
+							OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)}]
+		
+		[[OHSHITManager defaultManager] setStorageFailuresList:tList];
 																   
 		NSError * tError=nil;
 		
