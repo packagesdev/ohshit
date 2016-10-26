@@ -19,7 +19,9 @@ int main(int argc, const char * argv[])
 																   
 		NSError * tError=nil;
 		
-		if ([[NSData dataWithBytes:"dummy" length:5] writeToFile:@"/Users/Shared/TestData" options:NSDataWritingAtomic error:&tError]==NO)
+		if ([[NSData dataWithBytes:"dummy" length:5] writeToFile:@"/Users/Shared/TestData" 
+														 options:NSDataWritingAtomic 
+														   error:&tError]==NO)
 		{
 			if (tError!=nil)
 				NSLog(@"Oh Shit! %@",tError.localizedDescription);
