@@ -7,26 +7,26 @@ The OhShit framework (or static library) simulates errors when trying to read, w
 \#import <Foundation/Foundation.h>
 \#import <OhShit/OhShit.h>
 
-int main(int argc, const char * argv[])
-{
+int main(int argc, const char * argv\[\])
+\{
 	@autoreleasepool
-	{
+	\{
 		// Simulate no more space on the startup disk when trying to write things to /Users/Shared
 		
-		[[OHSHITManager defaultManager] setStorageFailuresList:@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"],
-																   OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)}]];
+		\[\[OHSHITManager defaultManager\] setStorageFailuresList:@\[@\{OHSHITStorageLocationKey:\[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"\],
+																   OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)\}\]\];
 																   
 		NSError * tError=nil;
 		
-		if ([[NSData dataWithBytes:"dummy" length:5] writeToFile:@"/Users/Shared/TestData" options:NSDataWritingAtomic error:&tError]==NO)
-		{
-			if (tError!=nil)
+		if (\[\[NSData dataWithBytes:"dummy" length:5\] writeToFile:@"/Users/Shared/TestData" options:NSDataWritingAtomic error:&tError\]==NO)
+		\{
+			if (tError\!=nil)
 				NSLog(@"Oh Shit! %@",tError.localizedDescription);
-		}
-	}
+		\}
+	\}
 	
     return 0;
-}
+\}
 
 ## Motivation
 
