@@ -21,10 +21,14 @@ NSString * const OHSHITStorageFailureTypeKey=@"Type";
 
 NSString * const OHSHITStoragePathAll=@"/";
 
+NSString * const OHSHITStorageFailuresListUserDefaultsKey=@"OHSHITStorageFailuresList";
+
 @interface OHSHITManager ()
 {
 	NSMutableDictionary * _failuresRegistry;
 }
+
++ (NSArray *)_failuresListWithRepresentation:(NSArray *)inRepresentation;
 
 @end
 
@@ -40,6 +44,92 @@ NSString * const OHSHITStoragePathAll=@"/";
 	});
 	
 	return sOHSHITManager;
+}
+
+#pragma mark -
+
++ (NSArray *)_failuresListWithRepresentation:(NSArray *)inRepresentation
+{
+	if (inRepresentation==nil || [inRepresentation isKindOfClass:[NSArray class]]==NO)
+		return nil;
+	
+	__block NSMutableArray * tMutableArray=[NSMutableArray array];
+	
+	[inRepresentation enumerateObjectsUsingBlock:^(NSDictionary * bDictionary,NSUInteger bIndex,BOOL * bOutStop){
+		
+		if ([bDictionary isKindOfClass:[NSDictionary class]]==NO)
+		{
+			*bOutStop=YES;
+			tMutableArray=nil;
+			return;
+		}
+		
+		NSNumber * tNumber=bDictionary[OHSHITStorageFailureTypeKey];
+		
+		if (tNumber==nil || [tNumber isKindOfClass:[NSNumber class]]==NO)
+		{
+			*bOutStop=YES;
+			tMutableArray=nil;
+			return;
+		}
+		
+		OHSHITStorageFailureType tFailureType=[tNumber unsignedIntegerValue];
+		
+		if (tFailureType>OHSHITStorageSimulateRandomContents)
+		{
+			*bOutStop=YES;
+			tMutableArray=nil;
+			return;
+		}
+		
+		if (bDictionary[OHSHITStorageFailureTypeKey]==nil && bDictionary[OHSHITStorageFailureTypeKey]==nil)
+		{
+			*bOutStop=YES;
+			tMutableArray=nil;
+			return;
+		}
+		
+		OHSHITStorageLocation * tStorageLocation=[[OHSHITStorageLocation alloc] initWithRepresentation:bDictionary];
+		
+		if (tStorageLocation==nil)
+		{
+			*bOutStop=YES;
+			tMutableArray=nil;
+			return;
+		}
+		
+		[tMutableArray addObject:@{OHSHITStorageFailureTypeKey:tNumber,OHSHITStorageLocationKey:tStorageLocation}];
+		
+	}];
+	
+	return [tMutableArray copy];
+}
+
++ (NSArray *)storageFailuresListFromUserDefaults
+{
+	NSArray * tRepresentation=[[NSUserDefaults standardUserDefaults] objectForKey:OHSHITStorageFailuresListUserDefaultsKey];
+	
+	return [OHSHITManager _failuresListWithRepresentation:tRepresentation];
+}
+
++ (NSArray *)storageFailuresListFromFileAtURL:(NSURL *)inURL
+{
+	if (inURL==nil)
+		return nil;
+	
+	NSArray * tRepresentation=[[NSArray alloc] initWithContentsOfURL:inURL];
+	
+	return [OHSHITManager _failuresListWithRepresentation:tRepresentation];
+}
+
++ (NSArray *)storageFailuresListFromFileAtPath:(NSString *)inPath
+{
+	if (inPath==nil)
+		return nil;
+	
+	NSArray * tRepresentation=[[NSArray alloc] initWithContentsOfFile:inPath];
+	
+	return [OHSHITManager _failuresListWithRepresentation:tRepresentation];
 }
 
 #pragma mark -
@@ -63,9 +153,7 @@ NSString * const OHSHITStoragePathAll=@"/";
 		NSMutableSet * tMutableLocationsSet=_failuresRegistry[tFailureTypeNumber];
 		
 		if (tMutableLocationsSet==nil)
-		{
 			tMutableLocationsSet=_failuresRegistry[tFailureTypeNumber]=[NSMutableSet set];
-		}
 		
 		[tMutableLocationsSet addObject:tStorageLocation];
 	}];

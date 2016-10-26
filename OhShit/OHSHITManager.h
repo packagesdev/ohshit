@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, OHSHITStorageFailureType)
 	
 	OHSHITStorageSimulateEmptyFile=20,
 	OHSHITStorageSimulateRandomContents=21,
-	
 };
 
 extern NSString * const OHSHITStorageLocationKey;
@@ -40,11 +39,16 @@ extern NSString * const OHSHITStorageFailureTypeKey;
 extern NSString * const OHSHITStoragePathAll;
 
 
+extern NSString * const OHSHITStorageFailuresListUserDefaultsKey;
+
 @interface OHSHITManager : NSObject
 
 + (instancetype)defaultManager;
 
-- (void)setStorageFailuresList:(NSArray *)inFailuresList;
++ (NSArray *)storageFailuresListFromUserDefaults;
++ (NSArray *)storageFailuresListFromFileAtURL:(NSURL *)inURL;
++ (NSArray *)storageFailuresListFromFileAtPath:(NSString *)inPath;
 
+- (void)setStorageFailuresList:(NSArray *)inFailuresList;
 
 @end

@@ -22,9 +22,7 @@ int main(int argc, const char * argv[])
 		if ([[NSFileManager defaultManager] createDirectoryAtURL:tURL withIntermediateDirectories:YES attributes:nil error:&tError]==NO)
 		{
 			if (tError!=nil)
-			{
 				NSLog(@"Oh Shit! %@",tError.localizedDescription);
-			}
 		}
 		
 		tError=nil;
@@ -32,9 +30,7 @@ int main(int argc, const char * argv[])
 		if ([[NSData dataWithBytes:"tutu" length:4] writeToFile:@"/Users/Shared/TestData" options:NSDataWritingAtomic error:&tError]==NO)
 		{
 			if (tError!=nil)
-			{
 				NSLog(@"Oh Shit! %@",tError.localizedDescription);
-			}
 		}
 		
 		NSData * tData=[NSData dataWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist" options:0 error:&tError];
@@ -42,9 +38,7 @@ int main(int argc, const char * argv[])
 		if (tData==nil)
 		{
 			if (tError!=nil)
-			{
 				NSLog(@"Oh Shit! %@",tError.localizedDescription);
-			}
 		}
 	}
 	
