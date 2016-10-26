@@ -62,8 +62,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:[url path],
-																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{NSFilePathErrorKey:[url path],
+																												 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			break;
@@ -74,8 +74,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:[url path],
-																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{NSFilePathErrorKey:[url path],
+																													 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -86,8 +86,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:[url path],
-																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:[url path],
+																												   NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -101,8 +101,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:[url path],
-																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
+																											NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -132,8 +132,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:path,
-																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{NSFilePathErrorKey:path,
+																												 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			break;
@@ -144,8 +144,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:path,
-																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{NSFilePathErrorKey:path,
+																													 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -156,8 +156,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:path,
-																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:path,
+																												   NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -171,8 +171,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:path,
-																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																											NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -214,8 +214,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:[url path],
-																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{NSFilePathErrorKey:[url path],
+																												 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			break;
@@ -226,8 +226,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:[url path],
-																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{NSFilePathErrorKey:[url path],
+																													 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -238,8 +238,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:[url path],
-																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:[url path],
+																												   NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -250,8 +250,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:[url path],
-																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
+																											NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -281,8 +281,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:path,
-																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{NSFilePathErrorKey:path,
+																												 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			break;
@@ -293,8 +293,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:path,
-																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{NSFilePathErrorKey:path,
+																													 NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -305,8 +305,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
 			
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:path,
-																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:path,
+																												   NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;
@@ -317,8 +317,8 @@
 			{
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
 				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:path,
-																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																											NSUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
 			return NO;

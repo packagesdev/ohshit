@@ -17,8 +17,6 @@ extern NSString * const OHSHITFilePathKey;
 
 extern NSString * const OHSHITUserStringVariantKey;
 
-extern NSString * const OHSHITUnderlyingErrorKey;
-
 @interface OHSHITManager (Private)
 
 + (NSArray *)readFailureTypes;
