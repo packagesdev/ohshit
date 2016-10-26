@@ -20,12 +20,17 @@
 @interface NSFileManager (OHSHIT_Private)
 
 - (BOOL)OHSHIT_createDirectoryAtURL:(NSURL *)url withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
+- (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path attributes:(NSDictionary *)attributes;
 
 - (BOOL)OHSHIT_createSymbolicLinkAtURL:(NSURL *)url withDestinationURL:(NSURL *)destURL error:(NSError **)errorPtr;
-
-- (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr;
-
 - (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path withDestinationPath:(NSString *)destPath error:(NSError **)errorPtr;
+- (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path pathContent:(NSString *)otherpath;
+
+- (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+- (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+
+- (BOOL)OHSHIT_createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr;
 
 @end
 
@@ -109,74 +114,6 @@
 	return NO;
 }
 
-- (BOOL)OHSHIT_createSymbolicLinkAtURL:(NSURL *)url withDestinationURL:(NSURL *)destURL error:(NSError **)errorPtr
-{
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
-	
-	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
-		return [self OHSHIT_createSymbolicLinkAtURL:url withDestinationURL:destURL error:errorPtr];
-	
-	if (errorPtr==NULL)
-		return NO;
-	
-	switch(tMatchingFailureType)
-	{
-		case OHSHIT_StorageSimulateNoMoreSpace:
-			
-			if (errorPtr!=NULL)
-			{
-				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
-				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:[url path],
-																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
-			}
-			
-			break;
-			
-		case OHSHIT_StorageSimulateReadOnly:
-			
-			if (errorPtr!=NULL)
-			{
-				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
-				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:[url path],
-																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
-			}
-			
-			return NO;
-			
-		case OHSHIT_StorageSimulateFileWritePermissionDenied:
-			
-			if (errorPtr!=NULL)
-			{
-				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
-				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:[url path],
-																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
-			}
-			
-			return NO;
-		
-		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
-			
-			if (errorPtr!=NULL)
-			{
-				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
-				
-				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:[url path],
-																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
-			}
-			
-			return NO;
-			
-		default:
-			break;
-	}
-	
-	return NO;
-}
-
-
 - (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr
 {
 	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
@@ -235,6 +172,85 @@
 				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
 				
 				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:path,
+																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		default:
+			break;
+	}
+	
+	return NO;
+}
+
+- (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path attributes:(NSDictionary *)attributes
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	return [self OHSHIT_createDirectoryAtPath:path attributes:attributes];
+}
+
+#pragma mark -
+
+- (BOOL)OHSHIT_createSymbolicLinkAtURL:(NSURL *)url withDestinationURL:(NSURL *)destURL error:(NSError **)errorPtr
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
+		return [self OHSHIT_createSymbolicLinkAtURL:url withDestinationURL:destURL error:errorPtr];
+	
+	if (errorPtr==NULL)
+		return NO;
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageSimulateNoMoreSpace:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOSPC userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteOutOfSpaceError userInfo:@{OHSHITFilePathKey:[url path],
+																												 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			break;
+			
+		case OHSHIT_StorageSimulateReadOnly:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{OHSHITFilePathKey:[url path],
+																													 OHSHITUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		case OHSHIT_StorageSimulateFileWritePermissionDenied:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{OHSHITFilePathKey:[url path],
+																												   OHSHITUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{OHSHITFilePathKey:[url path],
 																											OHSHITUnderlyingErrorKey:tUnderlyingError}];
 			}
 			
@@ -312,6 +328,91 @@
 	}
 	
 	return NO;
+}
+
+- (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path pathContent:(NSString *)otherpath
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	return [self OHSHIT_createSymbolicLinkAtPath:path pathContent:otherpath];
+}
+
+#pragma mark -
+
+- (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+		case OHSHITStorageSimulateEmptyFile:
+		case OHSHITStorageSimulateRandomContents:
+			break;
+			
+		default:
+			
+			return NO;
+	}
+	
+	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	return [self OHSHIT_copyPath:src toPath:dest handler:handler];
+}
+
+- (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+		case OHSHITStorageSimulateEmptyFile:
+		case OHSHITStorageSimulateRandomContents:
+			break;
+			
+		default:
+			
+			return NO;
+	}
+	
+	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	return [self OHSHIT_movePath:src toPath:dest handler:handler];
+}
+
+#pragma mark -
+
+- (BOOL)OHSHIT_createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+			
+			break;
+			
+		case OHSHIT_StorageSimulateNoMoreSpace:
+			
+			if ([data length]==0)
+				break;
+			
+		default:
+			
+			return NO;
+	}
+	
+	return [self OHSHIT_createFileAtPath:path contents:data attributes:attr];
 }
 
 @end

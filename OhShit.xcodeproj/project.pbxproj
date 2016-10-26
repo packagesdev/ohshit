@@ -46,8 +46,6 @@
 		F43B72731DC014DA0056C8F7 /* OhShit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OhShit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43B72771DC014DA0056C8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F43B72781DC014DA0056C8F7 /* OhShit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OhShit.h; sourceTree = "<group>"; };
-		F43B72841DC014DA0056C8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F43B72851DC014DA0056C8F7 /* OhShitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OhShitTests.m; sourceTree = "<group>"; };
 		F43B72901DC015490056C8F7 /* NSArray+OHSHIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+OHSHIT.h"; path = "Foundation+OHSHIT/NSArray+OHSHIT.h"; sourceTree = "<group>"; };
 		F43B72911DC015490056C8F7 /* NSArray+OHSHIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+OHSHIT.m"; path = "Foundation+OHSHIT/NSArray+OHSHIT.m"; sourceTree = "<group>"; };
 		F43B72921DC015490056C8F7 /* NSData+OHSHIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+OHSHIT.h"; path = "Foundation+OHSHIT/NSData+OHSHIT.h"; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 		F43B72B61DC015C70056C8F7 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = "RegexKitLite-1.2/RegexKitLite.m"; sourceTree = "<group>"; };
 		F43B72B91DC015F50056C8F7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
 		F43B72C01DC016AE0056C8F7 /* liblibohshit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibohshit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F43B72D01DC016AE0056C8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				F43B72751DC014DA0056C8F7 /* OhShit */,
-				F43B72821DC014DA0056C8F7 /* OhShitTests */,
-				F43B72CE1DC016AE0056C8F7 /* libohshitTests */,
 				F43B72741DC014DA0056C8F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,23 +133,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F43B72821DC014DA0056C8F7 /* OhShitTests */ = {
-			isa = PBXGroup;
-			children = (
-				F43B72851DC014DA0056C8F7 /* OhShitTests.m */,
-				F43B72831DC014DA0056C8F7 /* Supporting Files */,
-			);
-			path = OhShitTests;
-			sourceTree = "<group>";
-		};
-		F43B72831DC014DA0056C8F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F43B72841DC014DA0056C8F7 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		F43B728F1DC0152C0056C8F7 /* Foundation+OHSHIT */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,22 +167,6 @@
 				F43B72B91DC015F50056C8F7 /* libicucore.dylib */,
 			);
 			name = "Frameworks and Librarires";
-			sourceTree = "<group>";
-		};
-		F43B72CE1DC016AE0056C8F7 /* libohshitTests */ = {
-			isa = PBXGroup;
-			children = (
-				F43B72CF1DC016AE0056C8F7 /* Supporting Files */,
-			);
-			path = libohshitTests;
-			sourceTree = "<group>";
-		};
-		F43B72CF1DC016AE0056C8F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F43B72D01DC016AE0056C8F7 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -167,8 +167,6 @@
 			
 			if ([self length]==0)
 				break;
-		
-		case OHSHIT_StorageSimulateReadOnly:
 			
 		default:
 			

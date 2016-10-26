@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, OHSHITStorageFailureType)
 	OHSHIT_StorageSimulateFileNotFound=10,
 	
 	OHSHITStorageSimulateEmptyFile=20,
-	OHSHITStorageSimulateRandomContents=20,
+	OHSHITStorageSimulateRandomContents=21,
 	
 };
 
