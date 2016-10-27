@@ -15,8 +15,6 @@
 
 #include <Security/Security.h>
 
-#import "NSObject+OHSHIT.h"
-
 #import "OHSHITManager+Private.h"
 
 @interface NSData (OHSHIT_Private)
@@ -36,16 +34,6 @@
 @end
 
 @implementation NSData (OHSHIT)
-
-+ (void)load
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		[NSData OHSHIT_start];
-	});
-}
-
-#pragma mark -
 
 + (instancetype)OHSHIT_randomData
 {

@@ -15,6 +15,8 @@
 
 #import "RegexKitLite.h"
 
+#import "NSObject+OHSHIT.h"
+
 NSString * const OHSHITStorageLocationKey=@"Location";
 
 NSString * const OHSHITStorageFailureTypeKey=@"Type";
@@ -40,6 +42,13 @@ NSString * const OHSHITStorageFailuresListUserDefaultsKey=@"OHSHITStorageFailure
 	static dispatch_once_t onceToken;
 	
 	dispatch_once(&onceToken, ^{
+		
+		[NSArray OHSHIT_start];
+		[NSData OHSHIT_start];
+		[NSDictionary OHSHIT_start];
+		[NSFileManager OHSHIT_start];
+		[NSString OHSHIT_start];
+		
 		sOHSHITManager = [[OHSHITManager alloc] init];
 		
 		NSLog(@"OhShit.framework enabled");

@@ -13,8 +13,6 @@
 
 #import "NSArray+OHSHIT.h"
 
-#import "NSObject+OHSHIT.h"
-
 #import "OHSHITManager+Private.h"
 
 @interface NSArray (OHSHIT_Private)
@@ -25,16 +23,6 @@
 @end
 
 @implementation NSArray (OHSHIT)
-
-+ (void)load
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		[NSArray OHSHIT_start];
-	});
-}
-
-#pragma mark -
 
 - (BOOL)OHSHIT_writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
 {

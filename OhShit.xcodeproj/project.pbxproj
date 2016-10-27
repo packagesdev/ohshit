@@ -42,6 +42,16 @@
 		F43B72E91DC016F80056C8F7 /* NSObject+OHSHIT.m in Sources */ = {isa = PBXBuildFile; fileRef = F43B72991DC015490056C8F7 /* NSObject+OHSHIT.m */; };
 		F43B72EA1DC016F80056C8F7 /* NSString+OHSHIT.m in Sources */ = {isa = PBXBuildFile; fileRef = F43B729B1DC015490056C8F7 /* NSString+OHSHIT.m */; };
 		F43B72ED1DC017150056C8F7 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F43B72B91DC015F50056C8F7 /* libicucore.dylib */; };
+		F4F61A5A1DC2B68A00B5A7D2 /* NSObject+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72981DC015490056C8F7 /* NSObject+OHSHIT.h */; };
+		F4F61A5B1DC2B68E00B5A7D2 /* NSArray+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72901DC015490056C8F7 /* NSArray+OHSHIT.h */; };
+		F4F61A5C1DC2B69300B5A7D2 /* NSData+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72921DC015490056C8F7 /* NSData+OHSHIT.h */; };
+		F4F61A5D1DC2B69600B5A7D2 /* NSDictionary+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72941DC015490056C8F7 /* NSDictionary+OHSHIT.h */; };
+		F4F61A5E1DC2B69900B5A7D2 /* NSFileManager+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72961DC015490056C8F7 /* NSFileManager+OHSHIT.h */; };
+		F4F61A5F1DC2B69E00B5A7D2 /* NSString+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B729A1DC015490056C8F7 /* NSString+OHSHIT.h */; };
+		F4F61A601DC2B6A200B5A7D2 /* OHSHITStorageLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72AC1DC015540056C8F7 /* OHSHITStorageLocation.h */; };
+		F4F61A611DC2B6A500B5A7D2 /* OHSHITManager+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72AA1DC015540056C8F7 /* OHSHITManager+Private.h */; };
+		F4F61A621DC2B6AC00B5A7D2 /* OHSHITManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72A81DC015540056C8F7 /* OHSHITManager.h */; };
+		F4F61A631DC2B6AF00B5A7D2 /* OhShit.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72781DC014DA0056C8F7 /* OhShit.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -200,6 +210,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F61A5D1DC2B69600B5A7D2 /* NSDictionary+OHSHIT.h in Headers */,
+				F4F61A621DC2B6AC00B5A7D2 /* OHSHITManager.h in Headers */,
+				F4F61A5B1DC2B68E00B5A7D2 /* NSArray+OHSHIT.h in Headers */,
+				F4F61A601DC2B6A200B5A7D2 /* OHSHITStorageLocation.h in Headers */,
+				F4F61A5C1DC2B69300B5A7D2 /* NSData+OHSHIT.h in Headers */,
+				F4F61A5F1DC2B69E00B5A7D2 /* NSString+OHSHIT.h in Headers */,
+				F4F61A611DC2B6A500B5A7D2 /* OHSHITManager+Private.h in Headers */,
+				F4F61A5E1DC2B69900B5A7D2 /* NSFileManager+OHSHIT.h in Headers */,
+				F4F61A5A1DC2B68A00B5A7D2 /* NSObject+OHSHIT.h in Headers */,
+				F4F61A631DC2B6AF00B5A7D2 /* OhShit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +469,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				KEEP_PRIVATE_EXTERNS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -457,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				KEEP_PRIVATE_EXTERNS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

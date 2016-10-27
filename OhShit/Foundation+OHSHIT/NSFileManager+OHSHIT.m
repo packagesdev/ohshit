@@ -13,8 +13,6 @@
 
 #import "NSFileManager+OHSHIT.h"
 
-#import "NSObject+OHSHIT.h"
-
 #import "OHSHITManager+Private.h"
 
 @interface NSFileManager (OHSHIT_Private)
@@ -36,14 +34,6 @@
 @end
 
 @implementation NSFileManager (OHSHIT)
-
-+ (void)load
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		[NSFileManager OHSHIT_start];
-	});
-}
 
 - (BOOL)OHSHIT_createDirectoryAtURL:(NSURL *)url withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr
 {

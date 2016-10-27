@@ -13,8 +13,6 @@
 
 #import "NSDictionary+OHSHIT.h"
 
-#import "NSObject+OHSHIT.h"
-
 #import "OHSHITManager+Private.h"
 
 @interface NSDictionary (OHSHIT_Private)
@@ -28,16 +26,6 @@
 @end
 
 @implementation NSDictionary (OHSHIT)
-
-+ (void)load
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		[NSDictionary OHSHIT_start];
-	});
-}
-
-#pragma mark -
 
 - (NSDictionary *)OHSHIT_initWithContentsOfFile:(NSString *)path
 {
