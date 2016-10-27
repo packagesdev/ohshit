@@ -19,6 +19,9 @@
 
 @interface NSDictionary (OHSHIT_Private)
 
+- (NSDictionary *)OHSHIT_initWithContentsOfFile:(NSString *)path;
+- (NSDictionary *)OHSHIT_initWithContentsOfURL:(NSURL *)url;
+
 - (BOOL)OHSHIT_writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 - (BOOL)OHSHIT_writeToURL:(NSURL *)url atomically:(BOOL)atomically;
 
@@ -36,9 +39,55 @@
 
 #pragma mark -
 
+- (NSDictionary *)OHSHIT_initWithContentsOfFile:(NSString *)path
+{
+	OHSHITStorageFailureType tFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+			
+			break;
+			
+		case OHSHITStorageSimulateRandomContents:
+			
+			// A COMPLETER
+			
+		default:
+			
+			return nil;
+	}
+	
+	return [self OHSHIT_initWithContentsOfFile:path];
+}
+
+- (NSDictionary *)OHSHIT_initWithContentsOfURL:(NSURL *)url
+{
+	OHSHITStorageFailureType tFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+			
+			break;
+			
+		case OHSHITStorageSimulateRandomContents:
+			
+			// A COMPLETER
+			
+		default:
+			
+			return nil;
+	}
+	
+	return [self OHSHIT_initWithContentsOfURL:url];
+}
+
+#pragma mark -
+
 - (BOOL)OHSHIT_writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
 {
-	if ([[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
+	if ([[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
 	return [self OHSHIT_writeToFile:path atomically:useAuxiliaryFile];
@@ -46,7 +95,7 @@
 
 - (BOOL)OHSHIT_writeToURL:(NSURL *)url atomically:(BOOL)atomically
 {
-	if ([[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
+	if ([[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
 	return [self OHSHIT_writeToURL:url atomically:atomically];

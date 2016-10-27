@@ -71,7 +71,7 @@
 
 - (instancetype)OHSHIT_initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -122,7 +122,7 @@
 
 - (instancetype)OHSHIT_initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -173,7 +173,7 @@
 
 - (instancetype)OHSHIT_initWithContentsOfFile:(NSString *)path
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -200,7 +200,7 @@
 
 - (instancetype)OHSHIT_initWithContentsOfURL:(NSURL *)url
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -229,7 +229,7 @@
 
 - (BOOL)OHSHIT_writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -253,7 +253,7 @@
 
 - (BOOL)OHSHIT_writeToURL:(NSURL *)url atomically:(BOOL)atomically
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -276,7 +276,7 @@
 
 - (BOOL)OHSHIT_writeToFile:(NSString *)path options:(NSDataWritingOptions)writeOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	NSError * tUnderlyingError;
 	
@@ -335,7 +335,7 @@
 
 - (BOOL)OHSHIT_writeToURL:(NSURL *)url options:(NSDataWritingOptions)writeOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{

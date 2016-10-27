@@ -34,13 +34,15 @@ NSString * const OHSHITStorageFailuresListUserDefaultsKey=@"OHSHITStorageFailure
 
 @implementation OHSHITManager
 
-+ (instancetype)defaultManager
++ (instancetype)sharedManager
 {
 	static OHSHITManager * sOHSHITManager = nil;
 	static dispatch_once_t onceToken;
 	
 	dispatch_once(&onceToken, ^{
 		sOHSHITManager = [[OHSHITManager alloc] init];
+		
+		NSLog(@"OhShit.framework enabled");
 	});
 	
 	return sOHSHITManager;

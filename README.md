@@ -17,7 +17,7 @@ int main(int argc, const char * argv[])
 		NSArray * tList=@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"],
 							OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)}]
 		
-		[[OHSHITManager defaultManager] setStorageFailuresList:tList];
+		[[OHSHITManager sharedManager] setStorageFailuresList:tList];
 																   
 		NSError * tError=nil;
 		

@@ -38,7 +38,7 @@
 
 - (BOOL)OHSHIT_writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile
 {
-	if ([[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
+	if ([[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
 	return [self OHSHIT_writeToFile:path atomically:useAuxiliaryFile];
@@ -46,7 +46,7 @@
 
 - (BOOL)OHSHIT_writeToURL:(NSURL *)url atomically:(BOOL)atomically
 {
-	if ([[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
+	if ([[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
 	return [self OHSHIT_writeToURL:url atomically:atomically];

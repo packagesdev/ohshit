@@ -7,7 +7,7 @@ int main(int argc, const char * argv[])
 {
 	@autoreleasepool
 	{
-		[[OHSHITManager defaultManager] setStorageFailuresList:@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:[[@"~" stringByExpandingTildeInPath] stringByAppendingString:@"/"]],
+		[[OHSHITManager sharedManager] setStorageFailuresList:@[@{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:[[@"~" stringByExpandingTildeInPath] stringByAppendingString:@"/"]],
 																   OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateFileWritePermissionDenied)},
 																 @{OHSHITStorageLocationKey:[OHSHITStorageLocation storageLocationWithPath:@"/Users/Shared/"],
 																   OHSHITStorageFailureTypeKey:@(OHSHIT_StorageSimulateNoMoreSpace)},

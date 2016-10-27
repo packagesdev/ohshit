@@ -43,7 +43,7 @@ extern NSString * const OHSHITStorageFailuresListUserDefaultsKey;	// @"OHSHITSto
 
 @interface OHSHITManager : NSObject
 
-+ (instancetype)defaultManager;
++ (instancetype)sharedManager;
 
 + (NSArray *)storageFailuresListFromUserDefaults;
 + (NSArray *)storageFailuresListFromFileAtURL:(NSURL *)inURL;

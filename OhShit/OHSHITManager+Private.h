@@ -13,8 +13,6 @@
 
 #import "OHSHITManager.h"
 
-extern NSString * const OHSHITFilePathKey;
-
 extern NSString * const OHSHITUserStringVariantKey;
 
 @interface OHSHITManager (Private)

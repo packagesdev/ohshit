@@ -47,7 +47,7 @@
 
 - (BOOL)OHSHIT_createDirectoryAtURL:(NSURL *)url withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
 		return [self OHSHIT_createDirectoryAtURL:url withIntermediateDirectories:createIntermediates attributes:attributes error:errorPtr];
@@ -117,7 +117,7 @@
 
 - (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)createIntermediates attributes:(NSDictionary *)attributes error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
 		return [self OHSHIT_createDirectoryAtPath:path withIntermediateDirectories:createIntermediates attributes:attributes error:errorPtr];
@@ -187,7 +187,7 @@
 
 - (BOOL)OHSHIT_createDirectoryAtPath:(NSString *)path attributes:(NSDictionary *)attributes
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
@@ -199,7 +199,7 @@
 
 - (BOOL)OHSHIT_createSymbolicLinkAtURL:(NSURL *)url withDestinationURL:(NSURL *)destURL error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
 		return [self OHSHIT_createSymbolicLinkAtURL:url withDestinationURL:destURL error:errorPtr];
@@ -266,7 +266,7 @@
 
 - (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path withDestinationPath:(NSString *)destPath error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
 		return [self OHSHIT_createSymbolicLinkAtPath:path withDestinationPath:destPath error:errorPtr];
@@ -333,7 +333,7 @@
 
 - (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path pathContent:(NSString *)otherpath
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
@@ -345,7 +345,7 @@
 
 - (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -359,7 +359,7 @@
 			return NO;
 	}
 	
-	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
@@ -369,7 +369,7 @@
 
 - (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -383,7 +383,7 @@
 			return NO;
 	}
 	
-	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
@@ -393,12 +393,12 @@
 
 - (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
-	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:[path stringByDeletingLastPathComponent] matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileWritePermissionDenied)]];
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:[path stringByDeletingLastPathComponent] matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileWritePermissionDenied)]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
@@ -410,7 +410,7 @@
 
 - (BOOL)OHSHIT_createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
