@@ -13,11 +13,15 @@
 
 #import "NSData+OHSHIT.h"
 
+#include <Security/Security.h>
+
 #import "NSObject+OHSHIT.h"
 
 #import "OHSHITManager+Private.h"
 
 @interface NSData (OHSHIT_Private)
+
++ (instancetype)OHSHIT_randomData;
 
 - (instancetype)OHSHIT_initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
 - (instancetype)OHSHIT_initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
@@ -43,9 +47,31 @@
 
 #pragma mark -
 
++ (instancetype)OHSHIT_randomData
+{
+	// Generate a NSData with random contents whose length is between 1 byte and 512 KB.
+	
+	size_t tBufferLength=arc4random_uniform(512*1024-1)+1;
+	
+	uint8_t * tBuffer=malloc(tBufferLength*sizeof(uint8_t));
+	
+	if (tBuffer==NULL)
+		return nil;
+	
+	if (SecRandomCopyBytes(kSecRandomDefault, tBufferLength, tBuffer)!=0)
+	{
+		free(tBuffer);
+		return nil;
+	}
+	
+	return [[self class] dataWithBytesNoCopy:tBuffer length:tBufferLength];
+}
+
+#pragma mark -
+
 - (instancetype)OHSHIT_initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -65,10 +91,6 @@
 			
 			return nil;
 			
-		case OHSHITStorageSimulateEmptyFile:
-			
-			return [[self class] data];
-			
 		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
 			
 			if (errorPtr!=NULL)
@@ -80,6 +102,15 @@
 			}
 			
 			return nil;
+		
+		case OHSHITStorageSimulateEmptyFile:
+			
+			return [[self class] data];
+			
+		
+		case OHSHITStorageSimulateRandomContents:
+			
+			return [[self class] OHSHIT_randomData];
 			
 		default:
 			
@@ -91,45 +122,50 @@
 
 - (instancetype)OHSHIT_initWithContentsOfURL:(NSURL *)url options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
 	
 	switch(tMatchingFailureType)
 	{
-	case OHSHIT_StorageNoSimulatedFailure:
-		
-		break;
-		
-	case OHSHIT_StorageSimulateFileNotFound:
-		
-		if (errorPtr!=NULL)
-		{
-			NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+		case OHSHIT_StorageNoSimulatedFailure:
 			
-			*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
-																											NSUnderlyingErrorKey:tUnderlyingError}];
-		}
-		
-		return nil;
-		
-	case OHSHITStorageSimulateEmptyFile:
-		
-		return [[self class] data];
+			break;
 			
-	case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+		case OHSHIT_StorageSimulateFileNotFound:
 			
-		if (errorPtr!=NULL)
-		{
-			NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
 			
-			*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
-																											NSUnderlyingErrorKey:tUnderlyingError}];
-		}
-		
-		return nil;
-		
-	default:
-		
-		return nil;
+			return nil;
+				
+		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+				
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:[url path],
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return nil;
+				
+		case OHSHITStorageSimulateEmptyFile:
+				
+			return [[self class] data];
+				
+				
+		case OHSHITStorageSimulateRandomContents:
+				
+			return [[self class] OHSHIT_randomData];
+			
+		default:
+			
+			return nil;
 	}
 	
 	return [self OHSHIT_initWithContentsOfURL:url options:readOptionsMask error:errorPtr];
@@ -137,16 +173,54 @@
 
 - (instancetype)OHSHIT_initWithContentsOfFile:(NSString *)path
 {
-	if ([[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
-		return NO;
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+			
+			break;
+			
+		case OHSHITStorageSimulateEmptyFile:
+			
+			return [[self class] data];
+			
+			
+		case OHSHITStorageSimulateRandomContents:
+			
+			return [[self class] OHSHIT_randomData];
+			
+		default:
+			
+			return nil;
+	}
 	
 	return [self OHSHIT_initWithContentsOfFile:path];
 }
 
 - (instancetype)OHSHIT_initWithContentsOfURL:(NSURL *)url
 {
-	if ([[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]]!=OHSHIT_StorageNoSimulatedFailure)
-		return NO;
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForURL:url matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageNoSimulatedFailure:
+			
+			break;
+			
+		case OHSHITStorageSimulateEmptyFile:
+			
+			return [[self class] data];
+			
+			
+		case OHSHITStorageSimulateRandomContents:
+			
+			return [[self class] OHSHIT_randomData];
+			
+		default:
+			
+			return nil;
+	}
 	
 	return [self OHSHIT_initWithContentsOfURL:url];
 }

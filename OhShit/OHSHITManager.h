@@ -34,12 +34,12 @@ typedef NS_ENUM(NSUInteger, OHSHITStorageFailureType)
 
 extern NSString * const OHSHITStorageLocationKey;
 
-extern NSString * const OHSHITStorageFailureTypeKey;
+extern NSString * const OHSHITStorageFailureTypeKey;				// @"Type"
 
 extern NSString * const OHSHITStoragePathAll;
 
 
-extern NSString * const OHSHITStorageFailuresListUserDefaultsKey;
+extern NSString * const OHSHITStorageFailuresListUserDefaultsKey;	// @"OHSHITStorageFailuresList"
 
 @interface OHSHITManager : NSObject
 

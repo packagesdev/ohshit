@@ -29,6 +29,7 @@
 
 - (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
 - (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+- (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler;
 
 - (BOOL)OHSHIT_createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr;
 
@@ -388,6 +389,21 @@
 		return NO;
 	
 	return [self OHSHIT_movePath:src toPath:dest handler:handler];
+}
+
+- (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	tMatchingFailureType=[[OHSHITManager defaultManager] failureTypeForPath:[path stringByDeletingLastPathComponent] matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileWritePermissionDenied)]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
+	return [self OHSHIT_removeFileAtPath:path handler:handler];
 }
 
 #pragma mark -

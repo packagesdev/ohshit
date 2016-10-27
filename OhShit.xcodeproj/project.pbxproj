@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F41CDBAB1DC223BD00212135 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41CDBAA1DC223BD00212135 /* Security.framework */; };
+		F41CDBAC1DC223C900212135 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41CDBAA1DC223BD00212135 /* Security.framework */; };
 		F43B72791DC014DA0056C8F7 /* OhShit.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72781DC014DA0056C8F7 /* OhShit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F43B729C1DC015490056C8F7 /* NSArray+OHSHIT.h in Headers */ = {isa = PBXBuildFile; fileRef = F43B72901DC015490056C8F7 /* NSArray+OHSHIT.h */; };
 		F43B729D1DC015490056C8F7 /* NSArray+OHSHIT.m in Sources */ = {isa = PBXBuildFile; fileRef = F43B72911DC015490056C8F7 /* NSArray+OHSHIT.m */; };
@@ -43,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F41CDBAA1DC223BD00212135 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F43B72731DC014DA0056C8F7 /* OhShit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OhShit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43B72771DC014DA0056C8F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F43B72781DC014DA0056C8F7 /* OhShit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OhShit.h; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41CDBAB1DC223BD00212135 /* Security.framework in Frameworks */,
 				F43B72BA1DC015F50056C8F7 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41CDBAC1DC223C900212135 /* Security.framework in Frameworks */,
 				F43B72ED1DC017150056C8F7 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +169,7 @@
 		F43B72BB1DC015FA0056C8F7 /* Frameworks and Librarires */ = {
 			isa = PBXGroup;
 			children = (
+				F41CDBAA1DC223BD00212135 /* Security.framework */,
 				F43B72B91DC015F50056C8F7 /* libicucore.dylib */,
 			);
 			name = "Frameworks and Librarires";

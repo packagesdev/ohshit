@@ -13,9 +13,9 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const OHSHITStorageLocationPathKey;
+extern NSString * const OHSHITStorageLocationPathKey;		// @"Path"
 
-extern NSString * const OHSHITStorageLocationPatternKey;
+extern NSString * const OHSHITStorageLocationPatternKey;	// @"Pattern"
 
 
 @interface OHSHITStorageLocation : NSObject
