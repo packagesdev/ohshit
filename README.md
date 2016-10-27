@@ -36,7 +36,9 @@ int main(int argc, const char * argv[])
 
 ## Motivation
 
-Description forthcoming
+As the great North American philosopher F. Gump once mentioned, shit happens. And sometimes it happens when you're trying to access, read or write contents from the disk using the Foundation APIs. If you're trying to make sure your code is appropriately taken care of those cases, the OhShit framework may prove helpful.
+
+Instead of having to create volumes that are read-only or with no empty space, or change the permissions of existing files/folders, you will just have to define the simulated issues and run your unit tests or manual tests.
 
 ## Installation
 
