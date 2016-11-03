@@ -27,6 +27,8 @@
 
 - (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
 - (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+
+- (BOOL)OHSHIT_removeItemAtPath:(NSString *)path error:(NSError **)errorPtr;
 - (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler;
 
 - (BOOL)OHSHIT_createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr;
@@ -379,6 +381,68 @@
 		return NO;
 	
 	return [self OHSHIT_movePath:src toPath:dest handler:handler];
+}
+
+#pragma mark -
+
+- (BOOL)OHSHIT_removeItemAtPath:(NSString *)path error:(NSError **)errorPtr
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageSimulateReadOnly:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EROFS userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteVolumeReadOnlyError userInfo:@{NSFilePathErrorKey:path,
+																													 NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																											NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		default:
+			break;
+	}
+	
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:[path stringByDeletingLastPathComponent] matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileWritePermissionDenied)]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+	{
+		switch(tMatchingFailureType)
+		{
+			case OHSHIT_StorageSimulateFileWritePermissionDenied:
+				
+				if (errorPtr!=NULL)
+				{
+					NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
+					
+					*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:path,
+																													   NSUnderlyingErrorKey:tUnderlyingError}];
+				}
+				
+				return NO;
+				
+			default:
+				break;
+		}
+	}
+	
+	return [self OHSHIT_removeItemAtPath:path error:errorPtr];
 }
 
 - (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler
