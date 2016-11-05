@@ -261,7 +261,22 @@
 	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
 	
 	if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
-		return [self OHSHIT_createSymbolicLinkAtPath:path withDestinationPath:destPath error:errorPtr];
+	{
+		tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:destPath matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileNotFound)]];
+		
+		if (tMatchingFailureType==OHSHIT_StorageNoSimulatedFailure)
+			return [self OHSHIT_createSymbolicLinkAtPath:path withDestinationPath:destPath error:errorPtr];
+		
+		if (errorPtr!=NULL)
+		{
+			NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+			
+			*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:destPath,
+																										NSUnderlyingErrorKey:tUnderlyingError}];
+		}
+		
+		return NO;
+	}
 	
 	if (errorPtr==NULL)
 		return NO;
@@ -330,6 +345,11 @@
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
 	
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:otherpath matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileNotFound)]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+		return NO;
+	
 	return [self OHSHIT_createSymbolicLinkAtPath:path pathContent:otherpath];
 }
 
@@ -387,7 +407,7 @@
 
 - (BOOL)OHSHIT_removeItemAtPath:(NSString *)path error:(NSError **)errorPtr
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly),@(OHSHIT_StorageSimulateFileNotFound)]];
 	
 	switch(tMatchingFailureType)
 	{
@@ -414,6 +434,16 @@
 			}
 			
 			return NO;
+			
+		case OHSHIT_StorageSimulateFileNotFound:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																											NSUnderlyingErrorKey:tUnderlyingError}];
+			}
 			
 		default:
 			break;
@@ -447,7 +477,7 @@
 
 - (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler
 {
-	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly)]];
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:@[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateReadOnly),@(OHSHIT_StorageSimulateFileNotFound)]];
 	
 	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
 		return NO;
