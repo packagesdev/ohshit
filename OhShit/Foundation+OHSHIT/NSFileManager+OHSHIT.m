@@ -25,8 +25,13 @@
 - (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path withDestinationPath:(NSString *)destPath error:(NSError **)errorPtr;
 - (BOOL)OHSHIT_createSymbolicLinkAtPath:(NSString *)path pathContent:(NSString *)otherpath;
 
+- (NSDictionary *)OHSHIT_attributesOfItemAtPath:(NSString *)path error:(NSError **)errorPtr;
+
 - (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+//- (BOOL)OHSHIT_copyItemAtPath:(NSString *)src toPath:(NSString *)dest error:(NSError **)errorPtr;
+
 - (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler;
+//- (BOOL)OHSHIT_moveItemAtPath:(NSString *)src toPath:(NSString *)dest error:(NSError **)errorPtr;
 
 - (BOOL)OHSHIT_removeItemAtPath:(NSString *)path error:(NSError **)errorPtr;
 - (BOOL)OHSHIT_removeFileAtPath:(NSString *)path handler:(id)handler;
@@ -355,6 +360,57 @@
 
 #pragma mark -
 
+- (NSDictionary *)OHSHIT_attributesOfItemAtPath:(NSString *)path error:(NSError **)errorPtr
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:path matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageSimulateFileNotFound:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return nil;
+			
+		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:path,
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return nil;
+			
+		case OHSHIT_StorageSimulateFileReadPermissionDenied:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoPermissionError userInfo:@{NSFilePathErrorKey:path,
+							  NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return nil;
+			
+		default:
+			break;
+	}
+	
+	return [self OHSHIT_attributesOfItemAtPath:path error:errorPtr];
+}
+
+#pragma mark -
+
 - (BOOL)OHSHIT_copyPath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
 {
 	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
@@ -378,6 +434,67 @@
 	
 	return [self OHSHIT_copyPath:src toPath:dest handler:handler];
 }
+
+/*- (BOOL)OHSHIT_copyItemAtPath:(NSString *)src toPath:(NSString *)dest error:(NSError **)errorPtr
+{
+	OHSHITStorageFailureType tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager readFailureTypes]];
+	
+	switch(tMatchingFailureType)
+	{
+		case OHSHIT_StorageSimulateFileMissingIntermediaryDirectory:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:src,
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		case OHSHIT_StorageSimulateFileNotFound:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:ENOENT userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadNoSuchFileError userInfo:@{NSFilePathErrorKey:src,
+																												NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		case OHSHIT_StorageSimulateFileReadPermissionDenied:
+			
+			if (errorPtr!=NULL)
+			{
+				NSError * tUnderlyingError=[NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
+				
+				*errorPtr=[NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteNoPermissionError userInfo:@{NSFilePathErrorKey:src,
+																												  @"NSUserStringVariant":@[@"Copy"],
+																												  @"NSDestinationFilePath":dest,
+																												  NSUnderlyingErrorKey:tUnderlyingError}];
+			}
+			
+			return NO;
+			
+		default:
+			
+			break;
+	}
+	
+	tMatchingFailureType=[[OHSHITManager sharedManager] failureTypeForPath:src matchingFailuresTypes:[OHSHITManager writeFailureTypes]];
+	
+	if (tMatchingFailureType!=OHSHIT_StorageNoSimulatedFailure)
+	{
+		// To be completed
+ 
+		return NO;
+	}
+	
+	return [self OHSHIT_copyItemAtPath:src toPath:dest error:errorPtr];
+}*/
 
 - (BOOL)OHSHIT_movePath:(NSString *)src toPath:(NSString *)dest handler:(id)handler
 {
