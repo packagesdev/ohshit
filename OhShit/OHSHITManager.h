@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, OHSHITStorageFailureType)
 	OHSHIT_StorageSimulateReadOnly=2,
 	
 	OHSHIT_StorageSimulateFileWritePermissionDenied=3,
+	OHSHIT_StorageSimulateFileReadPermissionDenied=4,
 	
 	OHSHIT_StorageSimulateFileMissingIntermediaryDirectory=8,
 	

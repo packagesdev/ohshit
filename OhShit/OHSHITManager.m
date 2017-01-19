@@ -174,7 +174,7 @@ NSString * const OHSHITStorageFailuresListUserDefaultsKey=@"OHSHITStorageFailure
 
 + (NSArray *)readFailureTypes
 {
-	return @[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateFileNotFound),@(OHSHITStorageSimulateEmptyFile),@(OHSHITStorageSimulateRandomContents)];
+	return @[@(OHSHIT_StorageSimulateFileMissingIntermediaryDirectory),@(OHSHIT_StorageSimulateFileNotFound),@(OHSHIT_StorageSimulateFileReadPermissionDenied),@(OHSHITStorageSimulateEmptyFile),@(OHSHITStorageSimulateRandomContents)];
 }
 
 + (NSArray *)writeFailureTypes
