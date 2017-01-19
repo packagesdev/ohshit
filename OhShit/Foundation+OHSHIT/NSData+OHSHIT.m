@@ -13,7 +13,7 @@
 
 #import "NSData+OHSHIT.h"
 
-#include <Security/Security.h>
+#include <Security/SecRandom.h>
 
 #import "OHSHITManager+Private.h"
 
